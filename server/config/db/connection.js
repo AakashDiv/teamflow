@@ -7,8 +7,18 @@ const connectDB = async(uri)=>{
          console.log("Connect to database successfully")
     } catch (error) {
         console.log("failed to connect DB");
-        throw error
+        throw new Error(error)
     }
 }
 
-module.exports = connectDB
+
+const disconnectDB = async(uri)=>{
+     try {
+        await mongoose.disconnect(uri);
+        console.log("MongoDB Disconnect Safly")
+     } catch (error) {
+         throw new Error(error)
+     }
+}
+
+module.exports = {connectDB, disconnectDB}
